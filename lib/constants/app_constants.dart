@@ -1,7 +1,7 @@
 class Appconstants {
-  static const String projectid = "63ce7483ca3a795c9cac";
-  static const String endpoint = "http://localhost/v1";
-  static const String dbID = "Medication_Database";
-    static const String collectionID = "medications";
-  static const String collectionID2 = "medication_tracking";
+  static const String projectid = "<projectID>";
+  static const String endpoint = "<Hostname or IP address>";
+  static const String dbID = "<database ID>";
+  static const String collectionID = "<collection ID 1>";
+  static const String collectionID2 = "<Collection ID 2>";
 }
