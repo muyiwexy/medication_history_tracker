@@ -30,7 +30,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="appwrite-callback-63ce7483ca3a795c9cac" />
+                <data android:scheme="appwrite-callback-[project-id]" />
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
