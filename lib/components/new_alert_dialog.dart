@@ -30,45 +30,10 @@ class NewAlertDialog extends StatefulWidget {
 
 class _NewAlertDialogState extends State<NewAlertDialog> {
   TextEditingController dateinput = TextEditingController();
-  // final List<TimerModel> _timers = [];
   final NotificationService _notificationService = NotificationService();
-  // Timer? _timer;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // Define the startCountdown function in JavaScript
-  //   js.context['startCountdown'] = (int seconds, Function callback) {
-  //     int count = seconds;
-  //     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-  //       if (count >= 0) {
-  //         callback(count);
-  //         count--;
-  //       }
-  //     });
-  //   };
-  // }
 
   bool get isAtLeastOneChecked =>
       widget.meditem!.any((element) => element.check == true);
-
-  // bool get checkedisTracking {
-  //   bool isAnyChecked = false;
-  //   bool isOtherChecked = false;
-
-  //   for (final element in widget.meditem!) {
-  //     if (element.check!) {
-  //       isAnyChecked = true;
-
-  //       if (element.isTrack == true) {
-  //         isOtherChecked = true;
-  //         break;
-  //       }
-  //     }
-  //   }
-
-  //   return isAnyChecked && isOtherChecked;
-  // }
 
   void _selectOption(int index) {
     if (mounted) {
@@ -99,69 +64,7 @@ class _NewAlertDialogState extends State<NewAlertDialog> {
         widget.meditem![index].id!,
         widget.meditem![index].userID!,
         dateinput.text);
-    // await widget.reminderstate.loadReminders(widget.user!.id!);
   }
-  
-
-  // void _addTimer() {
-  //   for (var i = 0; i < widget.reminderstate.reminderitem!.length; i++) {
-  //     var telltime = widget.reminderstate.reminderitem![i];
-  //     DateTime dateTime = DateFormat("MM/dd/yyyy H:mm").parse(telltime.date!);
-  //     int secondsDifference = DateTime.now().difference(dateTime).inSeconds;
-  //     if (secondsDifference < 0) {
-  //       widget.reminderstate.reminderitem!.removeAt(i);
-  //       i--;
-  //       continue;
-  //     }
-  //     int seconds = secondsDifference;
-  //     TimerModel newTimer =
-  //         TimerModel(id: telltime.id!, countdown: seconds, isRunning: true);
-  //     setState(() {
-  //       _timers.add(newTimer);
-  //     });
-  //     js.context.callMethod('startCountdown', [
-  //       seconds,
-  //       allowInterop((seconds) => _updateCountdown(newTimer.id, seconds))
-  //     ]);
-  //   }
-  // }
-
-  // void _updateCountdown(int id, int seconds) {
-  //   if (_timers.isEmpty) {
-  //     _timer!.cancel();
-  //     return;
-  //   }
-  //   int index = _timers.indexWhere((timer) => timer.id == id);
-  //   // if (index == -1) {
-  //   //   print("Timer with ID $id not found");
-  //   //   return;
-  //   // }
-  //   TimerModel updatedTimer = _timers[index].copyWith(countdown: seconds);
-  //   setState(() {
-  //     _timers[index] = updatedTimer;
-  //     print("${updatedTimer.id}: ${updatedTimer.countdown}");
-  //   });
-  //   if (seconds == 0) {
-  //     print("hello");
-  //     _onCountdownEnd(updatedTimer.id);
-  //   }
-  // }
-
-  // void _onCountdownEnd(int id) {
-  //   int mainindex = widget.reminderstate.reminderitem!
-  //       .indexWhere((timerer) => timerer.id == id);
-  //   // print(mainindex);
-  //   int index = _timers.indexWhere((timer) => timer.id == id);
-  //   setState(() {
-  //     _timers.removeAt(index);
-  //     widget.reminderstate.reminderitem!.removeAt(mainindex);
-  //   });
-  //   if (_timers.isEmpty) {
-  //     _timer!.cancel();
-  //     print("done");
-  //     return;
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -177,9 +80,6 @@ class _NewAlertDialogState extends State<NewAlertDialog> {
         TextButton(
             onPressed: () {
               Navigator.of(context).pop();
-              // if (mounted) {
-
-              // }
             },
             child: const Text(
               "Close",
@@ -188,7 +88,6 @@ class _NewAlertDialogState extends State<NewAlertDialog> {
         TextButton(
           onPressed: isAtLeastOneChecked
               ? () async {
-                  // _addTimer();
                   await widget.reminderstate.loadReminders(widget.user!.id!);
                   if (mounted) {
                     await _notificationService.scheduleNotifications(
@@ -246,25 +145,6 @@ class _NewAlertDialogState extends State<NewAlertDialog> {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            // SizedBox(
-            //   child: SwitchListTile(
-            //     title: const Text(
-            //       'Track',
-            //       style: TextStyle(
-            //         fontSize: 18.0,
-            //         fontWeight: FontWeight.bold,
-            //       ),
-            //     ),
-            //     value: widget.meditem![index].isTrack!,
-            //     onChanged: (value) {
-            //       if (mounted) {
-            //         setState(() {
-            //           widget.meditem![index].isTrack = value;
-            //         });
-            //       }
-            //     },
-            //   ),
-            // ),
             spacerheight10(),
             SizedBox(
               width: 500,
@@ -356,29 +236,6 @@ class _NewAlertDialogState extends State<NewAlertDialog> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class TimerModel {
-  final int id;
-  final int countdown;
-  final bool isRunning;
-
-  TimerModel({
-    required this.id,
-    required this.countdown,
-    required this.isRunning,
-  });
-
-  TimerModel copyWith({
-    int? countdown,
-    bool? isRunning,
-  }) {
-    return TimerModel(
-      id: this.id,
-      countdown: countdown ?? this.countdown,
-      isRunning: isRunning ?? this.isRunning,
     );
   }
 }
